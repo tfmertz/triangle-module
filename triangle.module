@@ -59,5 +59,22 @@ function triangle_form_submit($form, &$form_state) {
 }
 
 function triangle_check() {
-    
+    $sides = $_SESSION['triangle_sides'];
+
+    $output = "";
+    if($sides[0] + $sides[1] <= $sides[2] || $sides[1] + $sides[2] <= $sides[0] || $sides[0] + $sides[2] <= $sides[1]) {
+        return "The triangle is invalid";
+    }
+
+    if($sides[0] == $sides[1] && $sides[1] == $sides[2]) {
+        $output .= "The triangle is equilateral.";
+    }
+    elseif($sides[0] == $sides[1] || $sides[1] == $sides[2] || $sides[0] == $sides[2]) {
+        $output .= "The triangle is isosceles.";
+    }
+    else {
+        $output .= "The triangle is scalene.";
+    }
+
+    return $output;
 }
