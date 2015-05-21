@@ -1,0 +1,5 @@
+name = Triangle Tracker
+description = Determines what type of triangle is made by three given sides.
+package = Epicodus Examples
+core = 7.x
+files[] = triangle-tracker.module

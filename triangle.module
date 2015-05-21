@@ -1,0 +1,63 @@
+<?php
+
+function triangle_menu() {
+    $items['triangle-form'] = array(
+        'title' => 'Triangle Tracker',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('triangle_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['triangle-success'] = array(
+        'title' => 'Triangle Results',
+        'page callback' => 'triangle_check',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function triangle_form() {
+    $form['side1'] = array(
+        '#title' => 'Side 1',
+        '#type' => 'textfield',
+        '#description' => t('Length of Side 1'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
+    );
+    $form['side2'] = array(
+        '#title' => 'Side 2',
+        '#type' => 'textfield',
+        '#description' => t('Length of Side 2'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
+    );
+    $form['side3'] = array(
+        '#title' => 'Side 3',
+        '#type' => 'textfield',
+        '#description' => t('Length of Side 3'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Go',
+    );
+
+    return $form;
+}
+
+function triangle_form_submit($form, &$form_state) {
+    $arr[0] = $form_state['values']['side1'];
+    $arr[1] = $form_state['values']['side2'];
+    $arr[2] = $form_state['values']['side3'];
+
+    $_SESSION['triangle_sides'] = $arr;
+
+    $form_state['redirect'] = 'triangle-success';
+}
+
+function triangle_check() {
+    
+}
